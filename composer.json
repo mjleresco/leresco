@@ -1,0 +1,43 @@
+{
+    "name": "leresco/jsap",
+    "description": "A simple PHP and Javascript framework that connect the front end with back end via AJAX.",
+    "version": "1.0.0",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leresco",
+            "email": "mj.leresco@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "phpunit/phpunit": "^9.0",
+        "vlucas/phpdotenv": "^5.0"
+        
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "JSAP\\": "src/",
+            "JSAP\\PHP\\Core": "src/PHP/Core/",
+            "JSAP\\PHP\\Utils": "src/PHP/Util/",
+            "JSAP\\PHP\\App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fust\\Tests\\": "tests/"
+        }
+    }
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+    
+}

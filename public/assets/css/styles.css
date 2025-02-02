@@ -1,0 +1,604 @@
+/* General Styles */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.required {
+    color: red;
+}
+
+header {
+    background-color: #0055cc;
+    color: white;
+    padding: 20px 10px;
+}
+
+header .logo {
+    margin: 5px;
+    height: 35px;
+}
+
+header .mcf {
+    right: 5px;
+    margin: 5px;
+    margin-left: 15px;
+    width: 70%;
+    height: 35px;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    padding: 5px;
+    text-align: left;
+    background-color: #06e;
+    color: white;
+    margin: 0;
+    overflow-x: auto;
+}
+
+nav .sidebar-openBtn {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    font-size: 26px;
+    padding: 0;
+    padding-bottom: 20px;
+    border: 2px solid;
+    border-radius: 5px;
+    text-align: center;
+}
+
+nav .cp-title {
+    display: absolute;
+    margin: auto 15px;
+    font-size: 20px;
+}
+
+nav .profile-icon {
+    text-decoration: none;
+    color: white;
+    margin: auto 10px auto auto;
+    font-size: 20px;
+    display: absolute;
+}
+
+.ab-cont {
+    margin: auto;
+    padding: 20px;
+}
+
+.ab-cont h1 {
+    margin: 30px 0 0 0;
+}
+
+.welcome-img {
+    width: 100%;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+/* Impact Metrics Section */
+.impact {
+    background-color: #e2f7e2;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.impact-stats, .team-members {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    overflow auto;
+}
+
+.stat, .team-member {
+    width: 30%;
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.stat h3 {
+    font-size: 2.5rem;
+    color: #4CAF50;
+}
+
+.stat p {
+    font-size: 1.2rem;
+}
+
+section {
+    margin: 15px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+section p {
+    color: #555;
+}
+
+.btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+/* Events Page Styles */
+.events, .impact-stories {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.event, .story {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.event h3, .story h3 {
+    color: #333;
+}
+
+.event p, .story p {
+    color: #666;
+}
+
+.about {
+    background-color: #f8e8d8;
+    
+}
+
+.mission {
+    background-color: #e8f8d8;
+    
+}
+
+.team-members {
+    background-color: #d8e8f8;
+    
+}
+
+.team-member {
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+}
+
+.team-member img {
+    border-radius: 5px;
+    width: 95%;
+    height: 200px;
+    margin-bottom: 10px;
+}
+
+.team-member h4 {
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-size: 18px;
+}
+
+.team-member p {
+    margin-top: 1px;
+    font-size: 14px;
+    color: #777;
+}
+
+/* Featured Programs Section */
+.featured-programs {
+    background-color: #d8e8f8;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: auto;
+}
+
+.program {
+    background-color: #f8f8f8;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.program h3 {
+    color: #333;
+}
+
+.program p {
+    color: #666;
+}
+
+
+.event-viewer {
+    background-color: #f8fe8e8;
+    box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.event-register {
+    background-color: #f8e8f8;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+
+
+//New
+
+/* General Admin Styles */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Buttons */
+button, .btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover, .btn:hover {
+    background-color: #0056b3;
+}
+
+a.btn {
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* Form Styles */
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form input[type="radio"]{
+    max-width: 30px;
+}
+
+form input[type="submit"], button {
+    width: 100%;
+    margin-top: 15px;
+    background-color: #28a745;
+    border: none;
+}
+
+form input[type="submit"]:hover, button:hover {
+    background-color: #218838;
+}
+
+.sidebar {
+    display: none;
+    width: 250px;
+    position: fixed;
+    margin: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #0033aa;
+    padding: 20px;
+    padding-top: 70px;
+    color: white;
+    transition: 0.5s;
+}
+
+.sidebar h2 {
+    position: absolute;
+    top: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar .cancel {
+    position: absolute;
+    color: red;
+    top: 5px;
+    margin: 0;
+    padding: 0;
+    right: 10px;
+    font-size: 45px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #007bff;
+}
+
+/* Flash Message Styles */
+.flash-message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.flash-message.success {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.flash-message.error {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+.flash-message.info {
+    background-color: #2196F3; /* Blue */
+    color: white;
+}
+
+.flash-message.warning {
+    background-color: #FF9800; /* Orange */
+    color: white;
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+}
+
+.pagination a.active {
+    background-color: #28a745;
+    font-weight: bold;
+}
+
+.pagination a.disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+/* Action Links (Edit/Delete) */
+table a {
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+table a.edit {
+    background-color: #007bff;
+    color: white;
+}
+
+table a.edit:hover {
+    background-color: #0056b3;
+}
+
+table a.delete {
+    background-color: #f44336;
+    color: white;
+}
+
+table a.delete:hover {
+    background-color: #d32f2f;
+}
+
+
+/* Newsletter Section */
+.newsletter {
+    background-color: #3CAF40;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 100px;
+}
+
+.newsletter h2 {
+    margin: 0;
+}
+
+.newsletter form {
+    display: flex;
+}
+
+.newsletter input[type="email"] {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    margin: 0;
+    margin-right: 10px;
+}
+
+.newsletter button {
+    padding: 10px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 50%;
+    margin: 0;
+}
+
+.newsletter button:hover {
+    background-color: #e68900;
+}
+
+footer {
+    background-color: #0055cc;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 30px;
+}
+
+.short-links {
+    margin: 45px 20px 100px 20px;
+    text-align: left;
+}
+
+.short-links h2 {
+    margin: 2px 0;
+    padding: 0;
+}
+
+.short-links p {
+    margin: 0;
+    padding: 3px;
+    
+}
+
+.short-links a {
+    color: #ddd;
+    margin: 0;
+    padding: 0px;
+    text-decoration: none;
+}
+
+footer .container a {
+    color: white;
+}
+
+.footer-info {
+    margin: 0 20px;
+    text-align: left;
+}
+
+.footer-social-links {
+    margin: 100px 20px;
+    text-align: left;
+}
+
+.footer-social-links a {
+    margin: 2px 10px;
+}
+
+footer .muted-text {
+    margin: 20px;
+    color: #ddd;
+    font-size: 14px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr; /* Stack the statistics on smaller screens */
+    }
+    
+    .impact-stats, .team-members {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .impact .stat {
+        width: 60%;
+        margin: 15px;
+    }
+    
+    .team-member {
+        width: 80%;
+        margin: 10px;
+    }
+    
+    .pagination {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pagination a {
+        margin: 5px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        overflow-x: auto; /* Allow horizontal scrolling on small screens */
+    }
+}

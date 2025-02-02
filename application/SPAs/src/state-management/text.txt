@@ -1,0 +1,215 @@
+Here is the complete code of the framework's state management:
+
+```
+//Store.js
+class Store {
+  constructor(reducers) {
+    this.state = {};
+    this.reducers = reducers;
+    this.listeners = [];
+  }
+
+  getState() {
+    return this.state;
+  }
+  
+  dispatch(action) {
+      this.state = this.reducers(this.state, action);
+    this.notifyListeners();
+  }
+
+  updateState(newState) {
+    this.state = { ...this.state, ...newState };
+    this.notifyListeners();
+  }
+
+  notifyListeners() {
+    this.listeners.forEach(listener => listener());
+  }
+
+  subscribe(listener) {
+    this.listeners.push(listener);
+  }
+
+  unsubscribe(listener) {
+    const index = this.listeners.indexOf(listener);
+    if (index !== -1) {
+      this.listeners.splice(index, 1);
+    }
+  }
+
+  resetState() {
+    this.state = {};
+    this.notifyListeners();
+  }
+
+  getStateSlice(sliceName) {
+    return this.state[sliceName];
+  }
+
+  updateStateSlice(sliceName, newState) {
+    this.state[sliceName] = newState;
+    this.notifyListeners();
+  }
+}
+
+export default Store;
+```
+
+```
+//Actions.js
+class Actions {
+  constructor(store) {
+    this.store = store;
+  }
+
+  dispatch(action) {
+    // Handle action and update state
+    const newState = this.reduce(action);
+    this.store.updateState(newState);
+  }
+
+  reduce(action) {
+    // Implement reducer logic here
+    switch (action.type) {
+      case 'UPDATE_VALUE':
+        return { value: action.payload };
+      case 'RESET_STATE':
+        return {};
+      default:
+        return {};
+    }
+  }
+
+  createAction(type, payload) {
+    return { type, payload };
+  }
+
+  updateValue(value) {
+    return this.createAction('UPDATE_VALUE', value);
+  }
+
+  resetState() {
+    return this.createAction('RESET_STATE');
+  }
+}
+
+export default Actions;
+```
+
+```
+//reducers.js
+const combineReducers = reducers => {
+  return (state = {}, action) => {
+    return Object.keys(reducers).reduce((nextState, key) => {
+      nextState[key] = reducers[key](state[key], action);
+      return nextState;
+    }, {});
+  };
+};
+export default combineReducers;
+```
+
+```
+//StateContainer.js
+class StateContainer {
+  constructor(store, actions) {
+    this.store = store;
+    this.actions = actions;
+  }
+
+  getState() {
+    return this.store.getState();
+  }
+
+  dispatch(action) {
+    this.actions.dispatch(action);
+  }
+
+  resetState() {
+    this.store.resetState();
+  }
+
+  getStateSlice(sliceName) {
+    return this.store.getStateSlice(sliceName);
+  }
+
+  updateStateSlice(sliceName, newState) {
+    this.store.updateStateSlice(sliceName, newState);
+  }
+}
+
+export default StateContainer;
+```
+
+```
+//Middleware.js
+class Middleware {
+  constructor(store) {
+    this.store = store;
+  }
+
+  applyMiddleware(action) {
+    // Implement middleware logic here
+    console.log('Middleware applied:', action);
+    return action;
+  }
+    // middleware.js
+    const loggingMiddleware = store => next => action => {
+      console.log('Dispatching action:', action);
+      const result = next(action);
+      console.log('Next state:', store.getState());
+      return result;
+    };
+    
+    const thunkMiddleware = store => next => action => {
+      if (typeof action === 'function') {
+        return action(store.dispatch, store.getState);
+      }
+      return next(action);
+    };
+}
+export default Middleware;
+```
+
+```
+// debug.js
+const debug = {
+  log: console.log,
+  error: console.error,
+  // Add more debugging tools here...
+};
+```
+
+```
+// connect.js
+import Component from './component'; // Import our custom component class
+import Store from './store';
+
+const connect = (mapStateToProps, mapDispatchToProps) => (WrappedComponent) => {
+  class ConnectedComponent extends WrappedComponent {
+    constructor(props) {
+      super(props);
+      this.state = mapStateToProps(Store.getState());
+      this.actions = mapDispatchToProps(Store.dispatch);
+      Store.subscribe(() => {
+        this.setState(mapStateToProps(Store.getState()));
+      });
+    }
+
+    render() {
+      return super.render({
+        ...this.props,
+        state: this.state,
+        actions: this.actions,
+      });
+    }
+  }
+
+  return ConnectedComponent;
+};
+
+export default connect;
+```
+
+if there are something to modify, modify them. then add more features to it. But, remember no use of any external library, build anything from scratch.

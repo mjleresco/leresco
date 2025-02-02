@@ -1,0 +1,299 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+    background-color: #050;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    height: 100px;
+}
+
+header .toolbar {
+    height: 60px;
+    width: 100%;
+    padding: 5px 10px;
+}
+
+header .toolbar .icon {
+    height: 100%;
+}
+
+header .toolbar .name {
+    position: absolute;
+    padding: 5px;
+    margin-left: 45px;
+    transform: scale(1.3, 1.2);
+}
+
+header nav {
+    background-color: #060;
+    height: 40px;
+    width: 100%;
+}
+
+header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 5px;
+  overflow: auto;
+  display: flex;
+}
+
+header nav ul li {
+  margin: 0 5px;
+  padding: 4px 10px;
+  weight: bold;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.current {
+  background-color: #bb0;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.project-card {
+  background-color: #f7f7f7;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.project-card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.project-card p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+//AudioWidget
+.audio {
+  width: 100%;
+  height: 50px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.audio audio {
+  width: 100%;
+  height: 100%;
+}
+
+//VideoWidget
+.video {
+  width: 100%;
+  height: 300px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.video video {
+  width: 100%;
+  height: 100%;
+}
+
+//MapWidget
+.map {
+  width: 100%;
+  height: 300px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.map #map {
+  width: 100%;
+  height: 100%;
+}
+
+//ChartWidget
+.chart {
+  width: 100%;
+  height: 300px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.chart canvas {
+  width: 100%;
+  height: 100%;
+}
+
+//GaugeWidget
+.gauge {
+  width: 100px;
+  height: 100px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+}
+
+.gauge svg {
+  width: 100%;
+  height: 100%;
+}
+
+//LoaderWidget
+.loader {
+  width: 50px;
+  height: 50px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+}
+
+.loader .loader-spinner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 5px solid #ccc;
+  border-top-color: #007bff;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+//TooltipWidget
+.tooltip {
+  position: absolute;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent #f0f0f0;
+}
+
+//PopoverWidget
+.popover {
+  position: absolute;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.popover::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent #f0f0f0;
+}
+
+//RatingWidget
+
+.rating .rating-star {
+  font-size: 50px;
+  color: #eee;
+  cursor: pointer;
+}
+
+.rating .rating-star::before {
+  content: '\2605'; /* empty star icon */
+  font-size: 35px;
+  color: #ccc;
+}
+
+.rating .rating-star.active::before {
+  content: '\2605'; /* filled star icon */
+  color: #007bff;
+}
+
+
+//SocialShareWidget
+
+.social-share {
+  display: flex;
+  align-items: center;
+}
+
+.social-share a {
+  margin-right: 10px;
+}
+
+.social-share a:last-child {
+  margin-right: 0;
+}
+
+.social-share i {
+  font-size: 24px;
+  color: #007bff;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+footer {
+    background-color: #070;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}

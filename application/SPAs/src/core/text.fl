@@ -1,0 +1,290 @@
+I have a code for these files:
+
+core/router.js
+```
+import LoadingComponent from './../components/LoadingComponent.js';
+
+class Router {
+    constructor() {
+        this.app = '';
+        this.routes = [];
+        this.middlewares = [];
+        this.currentUrl = '';
+        
+    }
+
+    add(path, view, callback = () => {}, options = {}) {
+        this.routes.push({path, view, callback, options });
+    }
+
+    use(middleware) {
+        this.middlewares.push(middleware);
+    }
+    
+    async navigate(app_id, url) {
+        this.app = document.getElementById(app_id);
+        this.currentUrl = url;
+        this.loading = true;
+        
+        // Execute middlewares
+        for (let middleware of this.middlewares) {
+            const shouldProceed = await middleware(url);
+            if (!shouldProceed) return; // Stop if middleware blocks navigation
+        }
+
+        const route = this.routes.find(route => this.matchRoute(url, route.path));
+
+        if (route) {
+            //window.history.pushState(null, null, url);
+            if (route.options.before) {
+                await route.options.before(); // Run before route callback
+            }
+            route.callback();
+            this.renderView(app_id, route.view);
+            if (route.options.after) {
+                route.options.after(); // Run after route callback
+            }
+        }
+    }
+    
+    matchRoute(url, path) {
+        // Simple route matching (can be expanded with regex support for params)
+        return url === path;
+    }
+
+    renderView(parent_id, view, data) {
+        const container = document.getElementById(parent_id);
+        if (container) {
+            container.innerHTML = view.render();
+            view.mount();
+        }
+    }
+
+    init(appId, homePage) {
+        window.addEventListener('popstate', () => {
+            this.navigate(appId, homePage);
+        });
+
+        // Initial routing
+        this.navigate(appId, homePage);
+    }
+}
+
+export default Router;
+```
+
+core/view.js
+```
+class View {
+    // Constructor
+    constructor(options) {
+        this.id = options.id;
+        this.template = options.template;
+        this.data = options.data;
+        this.components = []; // Array to store child components
+        this.widgets = []; // Array to store child widgets
+        this.isMounted = false; // Flag to track if the view is mounted
+    }
+    
+    /**
+    * Mount the view and its child components
+    */
+    mount() {
+        this.isMounted = true;
+        this.components.forEach((component) => {
+            component.component.mounted();
+        });
+        this.render();
+    }
+    
+    /**
+    * Unmount the view and its child components
+    */
+    unmount() {
+        this.isMounted = false;
+        this.components.forEach((component) => {
+            component.component.unmounted();
+        });
+    }
+    
+    /**
+    * Add a child component to the view
+    * @param {Component} component - Child component to add
+    */
+    addComponent(component, selector) {
+        if(typeof selector === 'string'){
+            this.components.push({component, selector});
+        }else{
+            this.components.push(component);
+        }
+    }
+    
+    addWidget(widget, selector) {
+        if(typeof selector === 'string'){
+            this.widgets.push({widget, selector});
+        }else{
+            this.widgets.push(widget);
+        }
+    }
+    
+    /**
+    * Render the view and its child components
+    */
+    render() {
+        let html = this.template;
+        
+        // Replace placeholders with component
+        this.components.forEach((component) => {
+            html = html.replace(`<c: ${component.selector}>`, component.component.render());
+        });
+     
+        // Replace placeholders with widget
+        this.widgets.forEach((widget) => {
+            html = html.replace(`<w: ${widget.selector}>`, widget.widget.render());
+        });
+     
+        // Replace placeholders with data
+        for (let key in this.data) {
+            const value = this.data[key];
+            html = html.replace(new RegExp(`{{${key}}}`, 'g'), value);
+        }
+
+        // Looping through arrays
+        html = html.replace(/\{\{#each (.*?)\}\}(.*?)\{\{\/each\}\}/gs, (match, arrayName, content) => {
+            const array = this.data[arrayName] || [];
+            return array.map(item => this.renderItem(item, content)).join('');
+        });
+
+        // Handling conditional rendering
+        html = html.replace(/\{\{#if (.*?)\}\}(.*?)\{\{\/if\}\}/gs, (match, condition, content) => {
+            return this.data[condition] ? content : '';
+        });
+
+        return html;
+    }
+
+    renderItem(item, content) {
+        let rendered = content;
+        for (let key in item) {
+            const value = item[key];
+            rendered = rendered.replace(new RegExp(`{{${key}}}`, 'g'), value);
+        }
+        return rendered;
+    }
+    
+    mountComponents() {
+        
+    }
+}
+
+export default View;
+```
+
+core/model.js
+```
+class Model {
+    constructor(data = {}) {
+        this.data = data;
+        this.listeners = [];
+    }
+
+    // Subscribe to data changes
+    onChange(callback) {
+        this.listeners.push(callback);
+    }
+
+    // Trigger listeners when data changes
+    triggerChange() {
+        this.listeners.forEach(callback => callback(this.data));
+    }
+
+    // Fetch data from API
+    async fetch(url) {
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            this.setData(data);
+            return data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    // Set data and notify listeners
+    setData(newData) {
+        this.data = { ...this.data, ...newData };
+        this.triggerChange();
+    }
+
+    // Get a property from the model
+    get(key) {
+        return this.data[key];
+    }
+
+    // Set a property in the model
+    set(key, value) {
+        this.data[key] = value;
+        this.triggerChange();
+    }
+
+    // Basic validation for models
+    validate(rules) {
+        for (let field in rules) {
+            const rule = rules[field];
+            if (rule.required && !this.data[field]) {
+                return `${field} is required`;
+            }
+            if (rule.minLength && this.data[field].length < rule.minLength) {
+                return `${field} must be at least ${rule.minLength} characters long`;
+            }
+        }
+        return null;
+    }
+}
+
+export default Model;
+```
+
+core/event.js
+```
+class Event {
+    constructor() {
+        this.events = {};
+    }
+
+    on(event, callback) {
+        if (!this.events[event]) {
+            this.events[event] = [];
+        }
+        this.events[event].push(callback);
+    }
+
+    off(event, callback) {
+        if (this.events[event]) {
+            this.events[event] = this.events[event].filter(cb => cb !== callback);
+        }
+    }
+
+    trigger(event, data) {
+        if (this.events[event]) {
+            this.events[event].forEach(callback => callback(data));
+        }
+    }
+
+    once(event, callback) {
+        const onceCallback = (data) => {
+            callback(data);
+            this.off(event, onceCallback);
+        };
+        this.on(event, onceCallback);
+    }
+
+    broadcast(event, data) {
+        // Notify all listeners across components or modules
+        this.trigger(event, data);
+    }
+}
+
+export default Event;
+```
+this is it.

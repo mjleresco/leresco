@@ -1,0 +1,15 @@
+import Router from './core/router.js';
+import routes from './../app-name/routes.js';
+import views from './../app-name/views/index.js';
+
+const router = new Router();
+
+// Add routes to the router
+routes.forEach((route) => {
+  const ViewComponent = views[route.view];
+  router.add(route.path, new ViewComponent);
+});
+
+router.init('app', '/');
+
+export default router;
